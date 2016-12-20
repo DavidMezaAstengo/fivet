@@ -50,6 +50,8 @@ public class EbeanBackendService implements BackendService {
         config.addClass(Paciente.class);
         config.addClass(Paciente.Sexo.class);
 
+        config.addClass(Control.class);
+
         // http://ebean-orm.github.io/docs/query/autotune
         config.getAutoTuneConfig().setProfiling(false);
         config.getAutoTuneConfig().setQueryTuning(false);

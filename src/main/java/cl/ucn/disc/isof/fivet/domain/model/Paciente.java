@@ -24,8 +24,9 @@ public class Paciente extends BaseModel {
     /**
      * Numero de la ficha
      */
+
     @Getter
-    @Column
+    @Column(nullable = false)
     private Integer numero;
 
     /**
