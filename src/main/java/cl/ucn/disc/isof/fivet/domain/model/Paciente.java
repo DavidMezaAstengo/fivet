@@ -72,8 +72,9 @@ public class Paciente extends BaseModel {
     @Getter
     @Column
     private String especie;
+
     /**
-     * Sexo?
+     * controles
      */
     @Getter
     @OneToMany

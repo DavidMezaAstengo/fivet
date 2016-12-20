@@ -10,9 +10,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Clase que representa a un control veterinario
+ * Clase que representa a un control de la veterinaria.
  *
- * Created by black on 09/11/2016.
+ * @author David Meza A
+ * @version 20161102
  */
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,50 +35,57 @@ public class Control extends BaseModel{
     @Getter
     @Column
     private Date proxControl;
+
     /**
      * Temperatura
      */
     @Getter
     @Column
     private Double temperatura;
+
     /**
      * Peso
      */
     @Getter
     @Column
     private Double peso;
+
     /**
      * Altura
      */
     @Getter
     @Column
     private Double altura;
+
     /**
      * Diagnostico
      */
     @Getter
     @Column
     private String diagnostico;
+
     /**
      * Nota
      */
     @Getter
     @Column
     private String nota;
+
     /**
      * ID
      */
     @Getter
-
     @Column(nullable = false)
     private Integer ID;
+
     /**
-     * rut del veterinario
+     * veterinario
      */
     @Getter
     @Column(nullable = false)
     @ManyToOne
     private Persona Veterinario;
+
     /**
      * rut del paciente
      */

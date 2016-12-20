@@ -79,6 +79,8 @@ public class EbeanBackendService implements BackendService {
 
 
     /**
+     * Obtener una persona buscando en backend por rut.
+     *
      * @param rut
      * @return the Persona
      */
@@ -91,12 +93,23 @@ public class EbeanBackendService implements BackendService {
                 .findUnique();
     }
 
+    /**
+     *Obtener una lista con todos los pacientes.
+     *
+     * @return lista de pacientes
+     */
     @Override
     public List<Paciente> getPacientes() {
         return this.ebeanServer.find(Paciente.class).findList();
 
     }
 
+    /**
+     * Obtener un paciente buscando en backend por su numero de paciente.
+     *
+     * @param numeroPaciente
+     * @return El Paciente
+     */
     @Override
     public Paciente getPaciente(Integer numeroPaciente) {
         return this.ebeanServer.find(Paciente.class)
@@ -105,6 +118,12 @@ public class EbeanBackendService implements BackendService {
                 .findUnique();
     }
 
+    /**
+     * Obtener una lista de los controles de un veterinario buscando por su rut.
+     *
+     * @param rutVeterinario
+     * @return lista de controles
+     */
     @Override
     public List<Control> getControlesVeterinario(String rutVeterinario) {
         return this.ebeanServer.find(Control.class)
@@ -114,15 +133,30 @@ public class EbeanBackendService implements BackendService {
 
     }
 
+    /**
+     * Obtener una lista de pacientes por buscando nombre.
+     *
+     * @param nombre
+     * @return lista de pacientes
+     */
     @Override
     public List<Paciente> getPacientesPorNombre(String nombre) {
-        return null;
+        return this.ebeanServer.find(Paciente.class)
+                .where()
+                .contains("nombre",nombre)
+                .findList();
     }
 
+    /**
+     * Agrega un control a un paciente.
+     *
+     * @param control
+     * @param numeroPaciente
+     */
     @Override
     public void agregarControl(Control control, Integer numeroPaciente) {
-
     }
+
 
     /**
      * Inicializa la base de datos
