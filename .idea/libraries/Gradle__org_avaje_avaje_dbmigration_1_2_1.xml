@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.avaje:avaje-dbmigration:1.2.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.avaje/avaje-dbmigration/1.2.1/ebcbbd821a52c501aacb9e99770edea4b815699a/avaje-dbmigration-1.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.avaje/avaje-dbmigration/1.2.1/fc76b7d5c473de56ce3e05c9dc5ba7b838dfe812/avaje-dbmigration-1.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

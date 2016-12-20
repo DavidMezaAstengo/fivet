@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: io.github.benas:random-beans:3.3.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.benas/random-beans/3.3.0/e12ea6cd9375e24e52127117cb58b542773ad20b/random-beans-3.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.benas/random-beans/3.3.0/b6dffe60557278036f117b243c3725cea8d8a429/random-beans-3.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

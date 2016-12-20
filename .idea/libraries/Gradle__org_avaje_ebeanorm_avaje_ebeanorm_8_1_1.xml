@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.avaje.ebeanorm:avaje-ebeanorm:8.1.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.avaje.ebeanorm/avaje-ebeanorm/8.1.1/1145ac0ddfd98d5c834d44f95e7856f669bfb8a1/avaje-ebeanorm-8.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.avaje.ebeanorm/avaje-ebeanorm/8.1.1/56405224d6c21487637eaf1da176b3859046f81f/avaje-ebeanorm-8.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
