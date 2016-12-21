@@ -41,8 +41,10 @@ public class EbeanBackendService implements BackendService {
         // Don't try this at home
         //config.setAutoCommitMode(false);
 
-        // config.addPackage("package.de.la.clase.a.agregar.en.el.modelo");
+        config.addPackage("package.de.la.clase.a.agregar.en.el.modelo");
         config.addClass(BaseModel.class);
+
+        config.addClass(Control.class);
 
         config.addClass(Persona.class);
         config.addClass(Persona.Tipo.class);
@@ -50,7 +52,6 @@ public class EbeanBackendService implements BackendService {
         config.addClass(Paciente.class);
         config.addClass(Paciente.Sexo.class);
 
-        config.addClass(Control.class);
 
         // http://ebean-orm.github.io/docs/query/autotune
         config.getAutoTuneConfig().setProfiling(false);

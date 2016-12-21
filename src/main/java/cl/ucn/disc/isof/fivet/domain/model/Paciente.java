@@ -78,7 +78,7 @@ public class Paciente extends BaseModel {
      * controles
      */
     @Getter
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @OrderBy("ID")
     private List<Control> controles;
     public enum Sexo {

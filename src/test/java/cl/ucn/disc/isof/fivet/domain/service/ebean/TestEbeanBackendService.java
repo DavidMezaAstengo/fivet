@@ -92,21 +92,21 @@ public class TestEbeanBackendService {
             log.debug("Persona founded: {}", persona);
             Assert.assertNotNull("Can't find Persona", persona);
             Assert.assertNotNull("Objeto sin id", persona.getId());
-            Assert.assertEquals("Nombre distintos!", rut, persona.getNombre());
+            Assert.assertEquals("Nombre distintos!", nombre, persona.getNombre());
             Assert.assertNotNull("Pacientes null", persona.getPacientes());
             Assert.assertTrue("Pacientes != 0", persona.getPacientes().size() == 0);
 
             // Update nombre
-            persona.setNombre(nombre + nombre);
-            persona.update();
+           persona.setNombre("nombre2");
+           persona.update();
         }
 
         // Get from backend v2
         {
             final Persona persona = backendService.getPersona(rut);
-            log.debug("Persona founded: {}", persona);
+            log.debug("Persona found: {}", persona);
             Assert.assertNotNull("Can't find Persona", persona);
-            Assert.assertEquals("Nombres distintos!", nombre, persona.getNombre());
+            Assert.assertEquals("Nombres distintos!", "nombre2", persona.getNombre());
         }
 
     }

@@ -81,9 +81,10 @@ public class Control extends BaseModel{
     /**
      * veterinario
      */
+
     @Getter
     @Column(nullable = false)
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Persona Veterinario;
 
     /**

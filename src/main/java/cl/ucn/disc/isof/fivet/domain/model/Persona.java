@@ -60,7 +60,7 @@ public class Persona extends BaseModel {
     @Getter
     @Setter
     @NotEmpty
-    private String mail;
+    private String email;
     /**
      * Tel. Fijo
      */
