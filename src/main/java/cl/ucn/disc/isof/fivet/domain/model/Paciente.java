@@ -80,9 +80,19 @@ public class Paciente extends BaseModel {
      * controles
      */
     @Getter
-    @OneToMany(cascade = CascadeType.ALL)
-    @OrderBy("ID")
+    @Column
+    @ManyToMany
+    @OrderBy("numeroid")
     private List<Control> controles;
+
+    /**
+     * Agrega el control en controles.
+     *
+     * @param control
+     */
+    public void add(final Control control) {
+        this.controles.add(control);
+    }
     public enum Sexo {
         @EnumValue("Macho")
         MACHO,

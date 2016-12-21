@@ -1,10 +1,7 @@
 package cl.ucn.disc.isof.fivet.domain.model;
 
 import com.durrutia.ebean.BaseModel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -76,7 +73,7 @@ public class Control extends BaseModel{
      */
     @Getter
     @Column(nullable = false)
-    private Integer ID;
+    private Integer numeroid;
 
     /**
      * veterinario
@@ -84,10 +81,7 @@ public class Control extends BaseModel{
 
     @Getter
     @Column(nullable = false)
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Persona Veterinario;
+    @ManyToOne
+    private Persona veterinario;
 
-    /**
-     * rut del paciente
-     */
 }

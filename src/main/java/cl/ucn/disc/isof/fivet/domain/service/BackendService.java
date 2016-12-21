@@ -20,6 +20,13 @@ public interface BackendService {
     Persona getPersona(final String rutEmail);
 
     /**
+     * Obtiene un control desde el backend dado su ID.
+     *
+     * @param id
+     * @return the Control
+     */
+    Control getControl(Integer id);
+    /**
      * Obtiene el listado de los pacientes.
      *
      * @return the {@link List} of {@link Paciente}

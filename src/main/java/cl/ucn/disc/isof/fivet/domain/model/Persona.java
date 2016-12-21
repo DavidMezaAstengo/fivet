@@ -54,6 +54,7 @@ public class Persona extends BaseModel {
     @Getter
     @Setter
     private String direccion;
+
     /**
      * Mail
      */
@@ -61,6 +62,7 @@ public class Persona extends BaseModel {
     @Setter
     @NotEmpty
     private String email;
+
     /**
      * Tel. Fijo
      */
@@ -68,6 +70,7 @@ public class Persona extends BaseModel {
     @Getter
     @Setter
     private String telFijo;
+
     /**
      * Tel. Movil
      */
@@ -75,6 +78,7 @@ public class Persona extends BaseModel {
     @Getter
     @Setter
     private String telMovil;
+
     /**
      * Tipo de la persona
      */
@@ -86,6 +90,7 @@ public class Persona extends BaseModel {
      * Listado de pacientes
      */
     @Getter
+    @Column
     @ManyToMany
     @OrderBy("numero")
     private List<Paciente> pacientes;

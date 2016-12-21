@@ -1,6 +1,5 @@
 create table control (
-  id                            integer not null,
-  paciente_id                   bigint not null,
+  id                            bigint auto_increment not null,
   fecha                         timestamp,
   prox_control                  timestamp,
   temperatura                   double,
@@ -8,11 +7,13 @@ create table control (
   altura                        double,
   diagnostico                   varchar(255),
   nota                          varchar(255),
+  numeroid                      integer not null,
   veterinario_id                bigint,
   version                       bigint not null,
   deleted                       boolean default false not null,
   when_created                  timestamp not null,
-  when_modified                 timestamp not null
+  when_modified                 timestamp not null,
+  constraint pk_control primary key (id)
 );
 
 create table paciente (
@@ -30,6 +31,12 @@ create table paciente (
   when_modified                 timestamp not null,
   constraint ck_paciente_sexo check ( sexo in ('Hembra','Macho','Indeterminado')),
   constraint pk_paciente primary key (id)
+);
+
+create table paciente_control (
+  paciente_id                   bigint not null,
+  control_id                    bigint not null,
+  constraint pk_paciente_control primary key (paciente_id,control_id)
 );
 
 create table persona (
@@ -56,11 +63,14 @@ create table persona_paciente (
   constraint pk_persona_paciente primary key (persona_id,paciente_id)
 );
 
-alter table control add constraint fk_control_paciente_id foreign key (paciente_id) references paciente (id) on delete restrict on update restrict;
-create index ix_control_paciente_id on control (paciente_id);
-
 alter table control add constraint fk_control_veterinario_id foreign key (veterinario_id) references persona (id) on delete restrict on update restrict;
 create index ix_control_veterinario_id on control (veterinario_id);
+
+alter table paciente_control add constraint fk_paciente_control_paciente foreign key (paciente_id) references paciente (id) on delete restrict on update restrict;
+create index ix_paciente_control_paciente on paciente_control (paciente_id);
+
+alter table paciente_control add constraint fk_paciente_control_control foreign key (control_id) references control (id) on delete restrict on update restrict;
+create index ix_paciente_control_control on paciente_control (control_id);
 
 alter table persona_paciente add constraint fk_persona_paciente_persona foreign key (persona_id) references persona (id) on delete restrict on update restrict;
 create index ix_persona_paciente_persona on persona_paciente (persona_id);

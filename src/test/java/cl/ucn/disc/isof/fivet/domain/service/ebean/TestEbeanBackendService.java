@@ -76,16 +76,29 @@ public class TestEbeanBackendService {
     @Test
     public void testPersona() {
 
-        final String rut = "1-1";
-        final String nombre = "Este es mi nombre";
+        final String rut = "19.182.627-2";
+        final String nombre = "David Meza";
         final String nombre2 = "nombre2";
+        final Persona.Tipo tipo = Persona.Tipo.CLIENTE;
+        final String password = "qwe1";
+
+        final String direccion = "qwe 123";
+        final String email = "qwe1@qwe.com";//buscar por email falta
+        final String telMovil = "123 123";
+        final String telFijo = "123 123 123";
+
+
         // Insert into backend
         {
             final Persona persona = Persona.builder()
                     .nombre(nombre)
                     .rut(rut)
-                    .password("durrutia123")
-                    .tipo(Persona.Tipo.CLIENTE)
+                    .password(password)
+                    .direccion(direccion)
+                    .email(email)
+                    .telMovil(telMovil)
+                    .telFijo(telFijo)
+                    .tipo(tipo)
                     .build();
 
             persona.insert();
@@ -128,9 +141,7 @@ public class TestEbeanBackendService {
         final Integer numero = 1;
         final String nombre = "nombre";
         final String nombre2 = "nombre2";
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date date = new Date();
-        final Date fechaNacimiento = date;
+        final Date fechaNacimiento =  new java.util.Date();
         final String color = "color";
         final String especie = "especie";
         Paciente.Sexo sexo = Paciente.Sexo.MACHO;
@@ -194,5 +205,72 @@ public class TestEbeanBackendService {
             Assert.assertTrue(pacientes.size() == 1);
         }
     }
+
+    @Test
+    public void testControl(){
+
+        final String rut = "19.182.627-2";
+        final String nombre = "David Meza";
+        final Persona.Tipo tipo = Persona.Tipo.VETERINARIO;
+        final String password = "qwe1";
+
+        final Integer id = 1;
+        final java.util.Date fecha = new java.util.Date();
+        final double altura = 1.0;
+        final double temperatura = 17.0;
+        final double peso = 6.0;
+        final String diagnostico = "diagnostico";
+        final String nota = "nota";
+
+
+        // Insert into backend
+        {
+        final Persona persona = Persona.builder()
+                .rut(rut)
+                .nombre(nombre)
+                .password(password)
+                .tipo(tipo)
+                .build();
+
+        persona.insert();
+
+        final Control control = Control.builder()
+                    .numeroid(id)
+                    .veterinario(persona)
+                    .fecha(fecha)
+                    .altura(altura)
+                    .temperatura(temperatura)
+                    .peso(peso)
+                    .diagnostico(diagnostico)
+                    .nota(nota)
+                    .build();
+
+        control.insert();
+        log.debug("Control to insert: {}", control);
+        Assert.assertNotNull("Objeto sin id", control.getId());
+
+
+        }
+
+        // Get from backend v1
+
+        {
+            final Control control = this.backendService.getControl(id);
+            log.debug("Control found: {}", control);
+            
+            Assert.assertNotNull("Can't find Control", control);
+            Assert.assertNotNull("Objeto sin id", control.getId());
+            Assert.assertEquals("ID distintos!", id, control.getNumeroid());
+            Assert.assertEquals("Fecha distintas!", fecha, control.getFecha());
+            Assert.assertEquals("Altura distintas!", String.valueOf(altura), String.valueOf(control.getAltura()));
+            Assert.assertEquals("Diagnostico distintos!", diagnostico, control.getDiagnostico());
+            Assert.assertEquals("Nota distintos!", nota, control.getNota());
+            Assert.assertEquals("Peso distintos!", String.valueOf(peso), String.valueOf((control.getPeso())));
+            Assert.assertEquals("Temperatura distintos!", String.valueOf(temperatura), String.valueOf(control.getTemperatura()));
+            Assert.assertEquals("Tipo Persona Distintos!", control.getVeterinario().getTipo(),tipo);
+        }
+    }
+
+
 
 }

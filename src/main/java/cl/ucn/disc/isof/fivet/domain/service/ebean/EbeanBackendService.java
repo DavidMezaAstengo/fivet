@@ -41,7 +41,7 @@ public class EbeanBackendService implements BackendService {
         // Don't try this at home
         //config.setAutoCommitMode(false);
 
-        config.addPackage("package.de.la.clase.a.agregar.en.el.modelo");
+   //     config.addPackage("package.de.la.clase.a.agregar.en.el.modelo");
         config.addClass(BaseModel.class);
 
         config.addClass(Control.class);
@@ -122,6 +122,19 @@ public class EbeanBackendService implements BackendService {
     }
 
     /**
+     * Obtiener un control desde el backend dado su ID.
+     *
+     * @param id
+     * @return El Paciente
+     */
+    @Override
+    public Control getControl(Integer id) {
+        return this.ebeanServer.find(Control.class)
+                .where()
+                .eq("ID",id)
+                .findUnique();
+    }
+    /**
      * Obtener una lista de los controles de un veterinario buscando por su rut.
      *
      * @param rutVeterinario
@@ -158,6 +171,9 @@ public class EbeanBackendService implements BackendService {
      */
     @Override
     public void agregarControl(Control control, Integer numeroPaciente) {
+        Paciente paciente = this.getPaciente(numeroPaciente);
+        paciente.getControles().add(control);
+        paciente.update();
     }
 
 
