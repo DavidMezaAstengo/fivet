@@ -70,6 +70,9 @@ public class TestEbeanBackendService {
         log.debug("Test finished in {}", stopWatch.toString());
     }
 
+
+
+
     /**
      * Test de la persona
      */
@@ -83,7 +86,7 @@ public class TestEbeanBackendService {
         final String password = "qwe1";
 
         final String direccion = "qwe 123";
-        final String email = "qwe1@qwe.com";//buscar por email falta
+        final String email = "qwe1@qwe.com";
         final String telMovil = "123 123";
         final String telFijo = "123 123 123";
 
@@ -108,6 +111,7 @@ public class TestEbeanBackendService {
         }
 
         // Get from backend v1
+        //buscando por rut
         {
             final Persona persona = backendService.getPersona(rut);
             log.debug("Persona found: {}", persona);
@@ -117,12 +121,23 @@ public class TestEbeanBackendService {
             Assert.assertNotNull("Pacientes null", persona.getPacientes());
             Assert.assertTrue("Pacientes != 0", persona.getPacientes().size() == 0);
 
-            // Update nombre
-           persona.setNombre(nombre2);
-           persona.update();
+
         }
 
         // Get from backend v2
+        //buscando por email
+        {
+            final Persona persona = backendService.getPersona(email);
+            log.debug("Persona found: {}", persona);
+            Assert.assertNotNull("Can't find Persona", persona);
+            Assert.assertEquals("Nombres distintos!", rut, persona.getRut());
+
+            // Update nombre
+            persona.setNombre(nombre2);
+            persona.update();
+        }
+
+        // Get from backend v3
         {
             final Persona persona = backendService.getPersona(rut);
             log.debug("Persona found: {}", persona);
@@ -133,6 +148,10 @@ public class TestEbeanBackendService {
         //hacer veterinario
     }
 
+
+
+
+
     /**
      * Test del Paciente
      */
@@ -141,6 +160,7 @@ public class TestEbeanBackendService {
         final Integer numero = 1;
         final String nombre = "nombre";
         final String nombre2 = "nombre2";
+        final String nombre3 = "nombre3";
         final Date fechaNacimiento =  new java.util.Date();
         final String color = "color";
         final String especie = "especie";
@@ -196,13 +216,45 @@ public class TestEbeanBackendService {
             Assert.assertEquals("Nombres distintos!", nombre2, paciente.getNombre());
         }
 
+        //nuevos pacientes
+        {
+            final Paciente paciente = Paciente.builder()
+                    .numero(2)
+                    .nombre(nombre3)
+                    .build();
+
+            paciente.insert();
+
+            log.debug("{Paciente to insert: {}", paciente);
+            Assert.assertNotNull("Objeto sin id", paciente.getId());
+
+            final Paciente paciente2 = Paciente.builder()
+                    .numero(3)
+                    .nombre(nombre3)
+                    .build();
+
+            paciente2.insert();
+
+            log.debug("{Paciente to insert: {}", paciente);
+            Assert.assertNotNull("Objeto sin id", paciente.getId());
+        }
+
         // Get from backend v3
-        //test de listas
+        //test de listas todos los pacientes
         {
             List<Paciente> pacientes = backendService.getPacientes();
             log.debug("Lista Pacientes found: {}", pacientes);
             Assert.assertTrue(pacientes != null);
-            Assert.assertTrue(pacientes.size() == 1);
+            Assert.assertTrue(pacientes.size() == 3);
+        }
+
+        // Get from backend v4
+        // test de listas todos los pacientes con nombre3
+        {
+            List<Paciente> pacientes = backendService.getPacientesPorNombre(nombre3);
+            log.debug("Lista Pacientes found: {}", pacientes);
+            Assert.assertTrue(pacientes != null);
+            Assert.assertTrue(pacientes.size() == 2);
         }
     }
 
@@ -329,6 +381,13 @@ public class TestEbeanBackendService {
 
         }
 
+        {
+
+            List<Control> controles1 = backendService.getControlesVeterinario(rut);
+            Assert.assertNotNull("Can't find controles", controles1);
+            Assert.assertTrue("Cantidad Controles Distintas!",controles1.size() == 1);
+
+        }
     }
 
 }
