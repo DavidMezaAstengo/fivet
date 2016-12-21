@@ -56,6 +56,8 @@ public class Paciente extends BaseModel {
     /**
      * Sexo
      */
+    @Getter
+    @Setter
     @Column
     private Sexo sexo;
 
