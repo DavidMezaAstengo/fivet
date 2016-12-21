@@ -1,5 +1,6 @@
 package cl.ucn.disc.isof.fivet.domain.model;
 
+import com.durrutia.ebean.BaseModel;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -18,7 +19,7 @@ import java.util.Date;
 @Builder
 @Entity
 @Table
-public class Examen {
+public class Examen extends BaseModel {
 
     /**
      * Numero identificador del examen
@@ -57,7 +58,7 @@ public class Examen {
     @Getter
     @Setter
     @Column
-    private String medicamentos;
+    private String medicamento;
 
     /**
      * Fecha

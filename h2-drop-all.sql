@@ -15,6 +15,8 @@ drop index if exists ix_persona_paciente_paciente;
 
 drop table if exists control;
 
+drop table if exists examen;
+
 drop table if exists paciente;
 
 drop table if exists paciente_control;

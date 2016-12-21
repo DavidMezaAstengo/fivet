@@ -51,6 +51,8 @@ public class EbeanBackendService implements BackendService {
         //config.addPackage("package.de.la.clase.a.agregar.en.el.modelo");
         config.addClass(BaseModel.class);
 
+        config.addClass(Examen.class);
+
         config.addClass(Control.class);
 
         config.addClass(Persona.class);

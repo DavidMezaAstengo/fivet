@@ -1,6 +1,7 @@
 package cl.ucn.disc.isof.fivet.domain.service.ebean;
 
 import cl.ucn.disc.isof.fivet.domain.model.Control;
+import cl.ucn.disc.isof.fivet.domain.model.Examen;
 import cl.ucn.disc.isof.fivet.domain.model.Paciente;
 import cl.ucn.disc.isof.fivet.domain.model.Persona;
 import cl.ucn.disc.isof.fivet.domain.service.BackendService;
@@ -390,8 +391,49 @@ public class TestEbeanBackendService {
         }
     }
 
+    @Test
+    public void testExamen() {
 
-/*
+        final Integer numero = 4;
+        final java.util.Date fecha = new java.util.Date();
+        final String nombre = "examen";
+        final String medicamento = "medicamentos";
+        final String resultado = "resultado";
+        // Insert into backend
+        {
+            final Paciente paciente = Paciente.builder()
+                    .numero(numero)
+                    .build();
+
+            paciente.insert();
+            log.debug("{Paciente to insert: {}", paciente);
+            Assert.assertNotNull("Objeto sin id", paciente.getId());
+
+            for (Integer i =0; i<10;i++ ) {
+                final Examen examen = Examen.builder()
+                        .fecha(fecha)
+                        .nombre(nombre)
+                        .numero(numero)
+                        .numeroid(i)
+                        .medicamento(medicamento)
+                        .resultado(resultado)
+                        .build();
+
+                examen.insert();
+                log.debug("{Examen to insert: {}", examen);
+                Assert.assertNotNull("Objeto sin id", examen.getId());
+            }
+        }
+
+        // Get from backend v1
+        {
+            final List <Examen> examenes = this.backendService.getExamenesPaciente(numero);
+            log.debug("Examenes found: {}", examenes);
+            Assert.assertNotNull("Can't find Examenes", examenes);
+            Assert.assertTrue("Pacientes != 10", examenes.size() == 10);
+        }
+    }
+    /*
     @Test
     public void testinitialize(){
         AssertFalse(this.backendService.)

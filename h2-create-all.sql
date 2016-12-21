@@ -16,6 +16,21 @@ create table control (
   constraint pk_control primary key (id)
 );
 
+create table examen (
+  id                            bigint auto_increment not null,
+  numeroid                      integer not null,
+  numero                        integer not null,
+  nombre                        varchar(255),
+  resultado                     varchar(255),
+  medicamento                   varchar(255),
+  fecha                         timestamp,
+  version                       bigint not null,
+  deleted                       boolean default false not null,
+  when_created                  timestamp not null,
+  when_modified                 timestamp not null,
+  constraint pk_examen primary key (id)
+);
+
 create table paciente (
   id                            bigint auto_increment not null,
   numero                        integer not null,
