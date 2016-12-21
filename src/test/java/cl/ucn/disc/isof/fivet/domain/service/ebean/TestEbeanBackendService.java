@@ -10,6 +10,8 @@ import org.junit.*;
 import org.junit.rules.Timeout;
 import org.junit.runners.MethodSorters;
 
+import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.AssertTrue;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -148,10 +150,6 @@ public class TestEbeanBackendService {
         //hacer veterinario
     }
 
-
-
-
-
     /**
      * Test del Paciente
      */
@@ -258,6 +256,9 @@ public class TestEbeanBackendService {
         }
     }
 
+    /**
+     * Test del control
+     */
     @Test
     public void testControl(){
 
@@ -300,12 +301,9 @@ public class TestEbeanBackendService {
         control.insert();
         log.debug("Control to insert: {}", control);
         Assert.assertNotNull("Objeto sin id", control.getId());
-
-
         }
 
         // Get from backend v1
-
         {
             final Control control = this.backendService.getControl(id);
             log.debug("Control found: {}", control);
@@ -323,7 +321,9 @@ public class TestEbeanBackendService {
 
         }
     }
-
+    /**
+     * Test de agregar control a paciente
+     */
     @Test
     public void testAgregarControl(){
 
@@ -390,4 +390,12 @@ public class TestEbeanBackendService {
         }
     }
 
+
+/*
+    @Test
+    public void testinitialize(){
+        AssertFalse(this.backendService.)
+        this.backendService.initialize();
+    }
+    */
 }

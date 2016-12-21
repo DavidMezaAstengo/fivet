@@ -1,6 +1,7 @@
 package cl.ucn.disc.isof.fivet.domain.service.ebean;
 
 import cl.ucn.disc.isof.fivet.domain.model.Control;
+import cl.ucn.disc.isof.fivet.domain.model.Examen;
 import cl.ucn.disc.isof.fivet.domain.model.Paciente;
 import cl.ucn.disc.isof.fivet.domain.model.Persona;
 import cl.ucn.disc.isof.fivet.domain.service.BackendService;
@@ -11,6 +12,8 @@ import com.avaje.ebean.config.EncryptKey;
 import com.avaje.ebean.config.EncryptKeyManager;
 import com.avaje.ebean.config.ServerConfig;
 import com.durrutia.ebean.BaseModel;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -22,6 +25,10 @@ public class EbeanBackendService implements BackendService {
      * EBean server
      */
     private final EbeanServer ebeanServer;
+    /*
+    @Getter
+    private Boolean Initialized = false;
+    */
 
     /**
      *
@@ -175,7 +182,19 @@ public class EbeanBackendService implements BackendService {
         paciente.add(control);
         paciente.update();
     }
-
+     /**
+     * Obtiener todos los examenes de un paciente.
+     *
+     * @param numero
+     * @return lista de pacientes
+     */
+   @Override
+   public List<Examen> getExamenesPaciente(Integer numero){
+        return this.ebeanServer.find(Examen.class)
+                .where()
+                .eq("numero",numero)
+                .findList();
+    }
 
     /**
      * Inicializa la base de datos
@@ -183,6 +202,21 @@ public class EbeanBackendService implements BackendService {
     @Override
     public void initialize() {
         log.info("Initializing Ebean ..");
+       /*
+        if (Initialized) {
+            log.info("ya esta inicializada la base de datos");
+        } else {
+            final Persona persona = Persona.builder()
+                    .nombre("admin")
+                    .rut("admin")
+                    .email("admin@admin.com")
+                    .password("admin")
+                    .tipo(Persona.Tipo.VETERINARIO)
+                    .build();
+            persona.insert();
+            this.Initialized = true;
+        }
+        */
     }
 
     /**

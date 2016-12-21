@@ -1,6 +1,7 @@
 package cl.ucn.disc.isof.fivet.domain.service;
 
 import cl.ucn.disc.isof.fivet.domain.model.Control;
+import cl.ucn.disc.isof.fivet.domain.model.Examen;
 import cl.ucn.disc.isof.fivet.domain.model.Paciente;
 import cl.ucn.disc.isof.fivet.domain.model.Persona;
 
@@ -48,6 +49,14 @@ public interface BackendService {
      * @return the {@link List} of {@link Control}.
      */
     List<Control> getControlesVeterinario(final String rutVeterinario);
+
+    /**
+     * Obtiene todos los examenes de un paciente.
+     *
+     * @param numero del paciente.
+     * @return the {@link List} of {@link Control}.
+     */
+    List<Examen> getExamenesPaciente(final Integer numero);
 
     /**
      * Obtiene todos los {@link Paciente} que poseen un match en su nombre.
