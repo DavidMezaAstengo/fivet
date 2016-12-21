@@ -257,7 +257,7 @@ public class TestEbeanBackendService {
         {
             final Control control = this.backendService.getControl(id);
             log.debug("Control found: {}", control);
-            
+
             Assert.assertNotNull("Can't find Control", control);
             Assert.assertNotNull("Objeto sin id", control.getId());
             Assert.assertEquals("ID distintos!", id, control.getNumeroid());
@@ -268,9 +268,67 @@ public class TestEbeanBackendService {
             Assert.assertEquals("Peso distintos!", String.valueOf(peso), String.valueOf((control.getPeso())));
             Assert.assertEquals("Temperatura distintos!", String.valueOf(temperatura), String.valueOf(control.getTemperatura()));
             Assert.assertEquals("Tipo Persona Distintos!", control.getVeterinario().getTipo(),tipo);
+
         }
     }
 
+    @Test
+    public void testAgregarControl(){
 
+        final String rut = "19.182.627-3";
+        final String nombre = "David Meza";
+        final Persona.Tipo tipo = Persona.Tipo.VETERINARIO;
+        final String password = "qwe1";
+
+        final Integer numero = 2;
+        final List <Control> controles = new ArrayList<Control>();
+
+        final Integer id = 2;
+
+        // Insert into backend
+        {
+            final Persona persona = Persona.builder()
+                    .rut(rut)
+                    .nombre(nombre)
+                    .password(password)
+                    .tipo(tipo)
+                    .build();
+
+            persona.insert();
+            log.debug("Persona to insert: {}", persona);
+            Assert.assertNotNull("Objeto sin id", persona.getId());
+
+            final Paciente paciente = Paciente.builder()
+                    .numero(numero)
+                    .controles(controles)
+                    .build();
+
+            paciente.insert();
+            log.debug("Paciente to insert: {}", paciente);
+            Assert.assertNotNull("Objeto sin id", paciente.getId());
+
+            final Control control = Control.builder()
+                    .numeroid(id)
+                    .veterinario(persona)
+                    .build();
+
+            control.insert();
+            log.debug("Control to insert: {}", control);
+            Assert.assertNotNull("Objeto sin id", control.getId());
+
+            this.backendService.agregarControl(control,numero);
+
+        }
+
+        // Get from backend v1
+        {
+            List<Control> controles1 = backendService.getPaciente(numero).getControles();
+            Assert.assertNotNull("Can't find controles", controles1);
+            Assert.assertTrue("Cantidad Controles Distintas!",controles1.size() == 1);
+            Assert.assertEquals("ID distintos!", id, controles1.get(0).getNumeroid());
+
+        }
+
+    }
 
 }

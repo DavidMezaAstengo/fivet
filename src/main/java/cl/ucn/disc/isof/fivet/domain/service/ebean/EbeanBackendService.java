@@ -41,7 +41,7 @@ public class EbeanBackendService implements BackendService {
         // Don't try this at home
         //config.setAutoCommitMode(false);
 
-   //     config.addPackage("package.de.la.clase.a.agregar.en.el.modelo");
+        //config.addPackage("package.de.la.clase.a.agregar.en.el.modelo");
         config.addClass(BaseModel.class);
 
         config.addClass(Control.class);
@@ -172,7 +172,7 @@ public class EbeanBackendService implements BackendService {
     @Override
     public void agregarControl(Control control, Integer numeroPaciente) {
         Paciente paciente = this.getPaciente(numeroPaciente);
-        paciente.getControles().add(control);
+        paciente.add(control);
         paciente.update();
     }
 
